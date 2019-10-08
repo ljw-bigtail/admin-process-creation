@@ -53,6 +53,13 @@ License: You must have a valid license purchased only from themeforest(the above
 
         .node_add{display: flex; align-items: center; justify-content: center}
         .node_add .fa{font-size: 40px;}
+
+		.dd-item.grey{}
+		/* case 0: className = 'grey';break;
+		case 10: className = 'yellow';break;
+		case 20: className = 'green';break;
+		case 15: className = 'blue';break; */
+		
     </style>
 </head>
 <!-- END HEAD -->
@@ -235,36 +242,26 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script>      
         var app = {
             data: {
-                color: ['red','blue','green','yellow','purple'],
+				color: ['red','blue','green','yellow','purple'],
+				// card node state =》 0, // 0 未开始，10 正在处理，20 已完成，15 延迟办理
                 card: [{
                     title: '阶段1',
                     node:[{
                         id: 1,
                         text: '测试1',
+                        state: 0,
                     },{
                         id: 2,
-                        text: '测试2',
+						text: '测试2',
+                        state: 10,
                     },{
                         id: 3,
-                        text: '测试3',
+						text: '测试3',
+                        state: 20,
                     },{
                         id: 4,
                         text: '测试4',
-                    }]
-                },{
-                    title: '阶段2',
-                    node:[{
-                        id: 11,
-                        text: '测试11',
-                    },{
-                        id: 21,
-                        text: '测试21',
-                    },{
-                        id: 31,
-                        text: '测试31',
-                    },{
-                        id: 41,
-                        text: '测试41',
+                        state: 15,
                     }]
                 }],
                 card_sort: [],
@@ -286,7 +283,18 @@ License: You must have a valid license purchased only from themeforest(the above
                             $('.page-actions .btn').removeClass('btn-default btn-transparent').addClass('red-haze');
                         }
                     });
-                },
+				},
+				stateToClass: function(state){
+					var className = ''
+					switch (state){
+						case 0: className = 'grey';break;
+						case 10: className = 'yellow';break;
+						case 20: className = 'green';break;
+						case 15: className = 'blue';break;
+						// 0 未开始，10 正在处理，20 已完成，15 延迟办理
+					}
+					return className
+				},
                 initNestableHtml: function(){
                     var html = ''
                     app.data.card.map((e, i)=>{
@@ -295,7 +303,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         e.node.map((_e, _i)=>{
                             _html += `<li class="dd-item dd3-item" data-id="${_e.id}">
                                 <div class="dd-handle dd3-handle"></div>
-                                <div class="dd3-content">${_e.text}</div>
+                                <div class="dd3-content bg-${app.methods.stateToClass(_e.state)}">${_e.text}</div>
                             </li>`
                         })
                         html += `<div class="portlet box ${app.data.color[i % app.data.color.length]}">
@@ -326,7 +334,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             app.data.card.map(function(__e, __i){
                                 app.data.card_sort[__i] = $('#nestable_list_' + __i).nestable('serialize')
                             });
-                            console.log(app.data.card_sort)
+							console.log(app.data.card_sort)
+							// TODO 排序接口
+
                         });
                     })
                 }
@@ -334,7 +344,6 @@ License: You must have a valid license purchased only from themeforest(the above
             init: function(){
                 Metronic.init(); // init metronic core components
                 Layout.init(); // init current layout
-                // 
                 app.methods.initTheme()
                 app.methods.initNestableHtml()
             }
