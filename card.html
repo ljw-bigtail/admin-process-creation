@@ -36,6 +36,13 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="./plugins/jquery-nestable/jquery.nestable.css"/ rel="stylesheet" type="text/css">
     
 	<!-- END GLOBAL MANDATORY STYLES -->
+	
+	<link href="./css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="./plugins/bootstrap-toastr/toastr.min.css"/>
+
+	<link href="./plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+	<link href="./plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+
 	<!-- BEGIN THEME STYLES -->
 	<link href="./css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css" />
 	<link href="./css/plugins.css" rel="stylesheet" type="text/css" />
@@ -46,170 +53,71 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="shortcut icon" href="favicon.ico" />
     
     <style>
-        .card_box{overflow-x: auto;}
-        .card_box .full_width{width: max-content; display: flex; align-items: center}
-        .card_box .full_width .portlet{display: inline-block; margin-right: 20px; width: 16vw; margin-bottom: 0; }
-        .card_box .full_width .portlet .portlet-body{min-height: 60vh}
+		.col-md-3{width: 21vw}
+		.col-md-6{width: 42vw}
+		.col-md-9{width: 63vw}
+		.col-md-12{width: 84vw}
+		.col-md-15{width: 105vw}
+
+        .card_box > .row{width: 100%; margin-bottom: 20px; padding: 20px 0}
+        .full_width{width: max-content;}
+
+		.dd-handle{background: transparent; border: 0;}
+		.dd3-content{height: auto;}
+		.dd3-content:hover{color: #333333;background-color: #E5E5E5;}
 
         .node_add{display: flex; align-items: center; justify-content: center}
-        .node_add .fa{font-size: 40px;}
+		.node_add .fa{font-size: 40px;}
+		
+		.btn_group{padding-bottom: 10px;}
+
+		.dd3-item{margin-bottom: 10px;}
+
+		small{display: block;font-size: 14px; margin: 10px 0; line-height: 18px;}
+
+		div::-webkit-scrollbar {width: 8px; height: 8px; background-color: #e5e5e5;border-radius:10px;}
+        div::-webkit-scrollbar-track {border-radius:10px;}
+        div::-webkit-scrollbar-thumb {border-radius:10px; background: #fff;}
     </style>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 
-<body class="page-header-fixed page-sidebar-closed-hide-logo ">
-	<!-- BEGIN HEADER -->
-	<div class="page-header navbar navbar-fixed-top">
-		<!-- BEGIN HEADER INNER -->
-		<div class="page-header-inner">
-			<!-- BEGIN LOGO -->
-			<div class="page-logo">
-				<a href="index.html">
-					<img src="./img/logo-light.png" alt="logo" class="logo-default" />
-				</a>
-				<div class="menu-toggler sidebar-toggler"></div>
-			</div>
-			<!-- END LOGO -->
-			<!-- BEGIN PAGE TOP -->
-			<div class="page-top">
-				<!-- BEGIN TOP NAVIGATION MENU -->
-				<div class="top-menu">
-					<ul class="nav navbar-nav pull-right">
-						<!-- BEGIN USER LOGIN DROPDOWN -->
-						<li class="dropdown dropdown-user dropdown-dark">
-							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-								<span class="username username-hide-on-mobile"> Nick </span>
-								<img alt="" class="img-circle" src="./img/avatar9.jpg" />
-							</a>
-							<ul class="dropdown-menu dropdown-menu-default">
-								<li>
-									<a href="login.html">
-										<i class="icon-key"></i> Log Out </a>
-								</li>
-							</ul>
-						</li>
-						<!-- END USER LOGIN DROPDOWN -->
-					</ul>
-				</div>
-				<!-- END TOP NAVIGATION MENU -->
-			</div>
-			<!-- END PAGE TOP -->
-		</div>
-		<!-- END HEADER INNER -->
-	</div>
-	<!-- END HEADER -->
-	<div class="clearfix">
-	</div>
+<body class="page-sidebar-closed-hide-logo ">
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
-		<!-- BEGIN SIDEBAR -->
-		<div class="page-sidebar-wrapper">
-			<div class="page-sidebar navbar-collapse collapse">
-				<!-- BEGIN SIDEBAR MENU -->
-				<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true"
-					data-slide-speed="200">
-					<li class="start ">
-						<a href="./index.html">
-							<i class="icon-home"></i>
-							<span class="title">主页</span>
-						</a>
-					</li>
-					<li class="last ">
-						<a href="javascript:;">
-							<i class="icon-basket"></i>
-							<span class="title">流程</span>
-							<span class="arrow "></span>
-						</a>
-						<ul class="sub-menu">
-							<li>
-								<a href="./card.html"><i class="icon-pencil"></i>流程管理</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<!-- END SIDEBAR MENU -->
+		<div class="page-head">
+			<!-- BEGIN PAGE TITLE -->
+			<div class="page-title">
+				<h1></h1>
+				<small class="text-blue"></small>
 			</div>
+			<!-- END PAGE TITLE -->
 		</div>
-		<!-- END SIDEBAR -->
 		<!-- BEGIN CONTENT -->
-		<div class="page-content-wrapper">
-			<div class="page-content">
-				<!-- BEGIN PAGE HEADER-->
-				<!-- BEGIN PAGE HEAD -->
-				<div class="page-head">
-					<!-- BEGIN PAGE TITLE -->
-					<div class="page-title">
-						<h1>流程 <small>流程管理</small></h1>
+		<div class="page-content">
+			<div class="btn_group">
+				<div class="row">
+					<div class="col-md-6 btn-group btn-group-solid">
+						<button type="button" class="btn blue" onclick="app.methods.create()"  data-toggle="modal" data-target="#responsive">新增阶段</button>
+						<button type="button" class="btn yellow" onclick="app.methods.create()"  data-toggle="modal" data-target="#responsive">新增节点</button>
 					</div>
-					<!-- END PAGE TITLE -->
-					<!-- BEGIN PAGE TOOLBAR -->
-					<div class="page-toolbar">
-						<!-- BEGIN THEME PANEL -->
-						<div class="btn-group btn-theme-panel">
-							<a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
-								<i class="icon-settings"></i>
-							</a>
-							<div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
-								<div class="row">
-									<div class="col-md-12">
-										<h3>THEME</h3>
-										<ul class="theme-colors">
-											<li class="theme-color theme-color-default" data-theme="default">
-												<span class="theme-color-view"></span>
-												<span class="theme-color-name">Dark Header</span>
-											</li>
-											<li class="theme-color theme-color-light active" data-theme="light">
-												<span class="theme-color-view"></span>
-												<span class="theme-color-name">Light Header</span>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- END THEME PANEL -->
+					<div class="col-md-6 btn-group btn-group-solid" style="display: inline-flex; justify-content: flex-end;">
+						<!-- <button type="button" class="btn green" onclick="app.methods.create()"  data-toggle="modal" data-target="#responsive">保存修改</button> -->
+						<button type="button" class="btn green" onclick="app.methods.save()"  data-toggle="modal" data-target="#responsive">保存并退出</button>
+						<button type="button" class="btn red" onclick="app.methods.end()"  data-toggle="modal" data-target="#responsive">退出编辑</button>
 					</div>
-					<!-- END PAGE TOOLBAR -->
 				</div>
-				<!-- END PAGE HEAD -->
-				<!-- BEGIN PAGE BREADCRUMB -->
-				<ul class="page-breadcrumb breadcrumb">
-					<li>
-						<a href="./index.html">Home</a>
-						<i class="fa fa-circle"></i>
-					</li>
-					<li>
-						<a href="#">流程</a>
-						<i class="fa fa-circle"></i>
-					</li>
-					<li>
-						<a href="#">流程管理</a>
-					</li>
-				</ul>
-				<!-- END PAGE BREADCRUMB -->
-				<!-- END PAGE HEADER-->
-				<!-- BEGIN PAGE CONTENT-->
-				<div class="portlet light card_box">
-				    <div class="full_width"></div>
-                </div>
-				<!-- END PAGE CONTENT-->
 			</div>
+			<div class="card_box">
+				<div class="card_box1"></div>
+				<div class="card_box2"></div>
+			</div>
+			<!-- END PAGE CONTENT-->
 		</div>
 		<!-- END CONTENT -->
 	</div>
 	<!-- END CONTAINER -->
-	<!-- BEGIN FOOTER -->
-	<div class="page-footer">
-		<div class="page-footer-inner">
-			2014 &copy; Metronic by keenthemes. 
-			<a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
-		</div>
-		<div class="scroll-to-top">
-			<i class="icon-arrow-up"></i>
-		</div>
-	</div>
-	<!-- END FOOTER -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 	<!-- BEGIN CORE PLUGINS -->
 	<!--[if lt IE 9]>
@@ -228,16 +136,27 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="./plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
     <script src="./plugins/jquery-nestable/jquery.nestable.js"></script>
     <script src="./plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-    
+	
+	<script src="./plugins/bootstrap-toastr/toastr.min.js"></script>
+
+	<script src="./plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+	<script src="./plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+
 	<!-- END CORE PLUGINS -->
 	<script src="./js/metronic.js" type="text/javascript"></script>
+	<script src="./js/common.js" type="text/javascript"></script>
+
     <script src="./js/layout.js" type="text/javascript"></script>
 	<script>      
         var app = {
             data: {
-                color: ['red','blue','green','yellow','purple'],
-                card: [{
-                    title: '阶段1',
+				id: tools.getURLParam('id'),
+				color: ['red','blue','green','yellow','purple'],
+				card_parallel: [{
+					id: 1001,
+                    title: '并行阶段1',
+                    from: 1,
+                    to: 4,
                     node:[{
                         id: 1,
                         text: '测试1',
@@ -252,7 +171,59 @@ License: You must have a valid license purchased only from themeforest(the above
                         text: '测试4',
                     }]
                 },{
+					id: 1002,
+					title: '并行阶段2',
+					from: 0,
+                    to: 2,
+                    node:[{
+                        id: 11,
+                        text: '测试11',
+                    },{
+                        id: 21,
+                        text: '测试21',
+                    },{
+                        id: 31,
+                        text: '测试31',
+                    },{
+                        id: 41,
+                        text: '测试41',
+                    }]
+                }],
+                card_main: [{
+					id: 1,
+                    title: '阶段1',
+                    node:[{
+                        id: 1,
+                        text: '第一阶段可并联或并行办理事项第一阶段可并联或并行办理事项第一阶段可并联或并行办理事项',
+                    },{
+                        id: 2,
+                        text: '测试2',
+                    },{
+                        id: 3,
+                        text: '测试3',
+                    },{
+                        id: 4,
+                        text: '测试4',
+                    }]
+                },{
+					id: 2,
                     title: '阶段2',
+                    node:[{
+                        id: 11,
+                        text: '测试11',
+                    },{
+                        id: 21,
+                        text: '测试21',
+                    },{
+                        id: 31,
+                        text: '测试31',
+                    },{
+                        id: 41,
+                        text: '测试41',
+                    }]
+                },{
+					id: 3,
+                    title: '阶段3',
                     node:[{
                         id: 11,
                         text: '测试11',
@@ -268,75 +239,120 @@ License: You must have a valid license purchased only from themeforest(the above
                     }]
                 }],
                 card_sort: [],
-                max_node_len: 8,
+				max_node_len: 8,
+				title: '邢台市政府投资工程建设项目审批服务流程图（新增建设用地）',
+				description: '1、本流程图适用于房屋建筑和市政基础设施工程建设项目，交通、水利、能源等专业领域的工程建设项目审批流程图由相关行业主管部门另行制定2、本流程图仅包括工程建设项目主要审批事项，未涵盖所有审批事项；部分事项办理时序并非法定前后置关系。3、行政审批并行办理事项、技术审查或中介服务事项与行政审批主流程事项并联或并行办理，不另行计算用时。',
             },
             methods: {
-                initTheme: function(){
-                    var panel = $('.theme-panel');
-                    $('.theme-colors > li', panel).click(function () {
-                        var color = $(this).attr("data-theme");
-                        var color_ = (Metronic.isRTL() ? color + '-rtl' : color);
-				        $('#style_color').attr("href", './css/themes/' + color_ + ".css");
-                        $('ul > li', panel).removeClass("active");
-                        $(this).addClass("active");
-
-                        if (color === 'dark') {
-                            $('.page-actions .btn').removeClass('red-haze').addClass('btn-default btn-transparent');
-                        } else {
-                            $('.page-actions .btn').removeClass('btn-default btn-transparent').addClass('red-haze');
-                        }
-                    });
-                },
+				nodeHtml: function(data){
+					var _html = ''
+					data.map((_e, _i)=>{
+						_html += `<li class="dd-item dd3-item" data-id="${_e.id}">
+							<div class="dd-handle dd3-handle"></div>
+							<div class="dd3-content alert alert-success alert-dismissable">${_e.text}</div>
+						</li>`
+					})
+					return `<ol class="dd-list">${_html}</ol>`
+				},
                 initNestableHtml: function(){
-                    var html = ''
-                    app.data.card.map((e, i)=>{
+					var html_main = '<div class="row"><div class="full_width">'
+					// 主流程
+					app.data.card_main = app.data.card_main.concat(app.data.card_main)
+                    app.data.card_main.map((e, i)=>{
                         app.data.card_sort.push([])
-                        var _html = ''
-                        e.node.map((_e, _i)=>{
-                            _html += `<li class="dd-item dd3-item" data-id="${_e.id}">
-                                <div class="dd-handle dd3-handle"></div>
-                                <div class="dd3-content">${_e.text}</div>
-                            </li>`
-                        })
-                        html += `<div class="portlet box ${app.data.color[i % app.data.color.length]}">
-                            <div class="portlet-title">
-                                <div class="caption">${e.title}</div>
-                            </div>
-                            <div class="portlet-body">
-                                <div class="dd" id="nestable_list_${i}">
-                                    <ol class="dd-list">${_html}</ol>
-                                </div>
-                            </div>
-                        </div>`
+						// ${app.data.color[i % app.data.color.length]}
+						html_main += `
+							<div class="col-md-3">
+								<div class="portlet light">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject font-${app.data.color[i % app.data.color.length]}  bold uppercase">${e.title}</span>
+										</div>
+										<div class="tools">
+											<a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+											<a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""></a>
+										</div>
+									</div>
+									<div class="portlet-body">
+										<div class="dd" id="nestable_list_${i}">${app.methods.nodeHtml(e.node)}</div>
+									</div>
+								</div>
+							</div>
+						`
+					})
+					html_main += '</div></div>'
+					$('.card_box1').html(html_main)
+
+					// 并行流程
+					var html_parallel = ''
+                    app.data.card_parallel.map((e, i)=>{
+						var html_left = ''
+						var left_data = new Array(e.from - 0)
+						left_data.fill(0, 0, left_data.length)
+						left_data.map((_e, _i)=>{
+							html_left += '<div class="col-md-3"></div>'
+						})
+						html_parallel += `
+							<div class="row">
+								<div class="full_width">
+									${html_left}
+									<div class="col-md-${(e.to - e.from) * 3}">
+										<div class="portlet light">
+											<div class="portlet-title">
+												<div class="caption">
+													<span class="caption-subject font-red-sunglo bold uppercase">${e.title}</span>
+													<span class="caption-helper"></span>
+												</div>
+												<div class="tools">
+													<a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+													<a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""></a>
+												</div>
+											</div>
+											<div class="portlet-body">
+												<div class="dd" id="nestable_parallel_${i}">${app.methods.nodeHtml(e.node)}</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						`
+					})
+					$('.card_box2').html(html_parallel)
+
+					// 节点拖拽
+                    app.data.card_main.map(function(e, i){
+                        $('#nestable_list_' + i).nestable()
+					})
+					app.data.card_parallel.map(function(e, i){
+                        $('#nestable_parallel_' + i).nestable()
                     })
-                    // xiaoyu 
-                    if(app.data.card.length < app.data.max_node_len - 1){
-                        html += `<div class="portlet box ${app.data.color[app.data.card.length % app.data.color.length]}">
-                            <div class="portlet-title">
-                                <div class="caption">新增阶段</div>
-                            </div>
-                            <div class="portlet-body node_add">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                        </div>`
-                    }
-                    $('.card_box .full_width').html(html)
-                    app.data.card.map(function(e, i){
-                        $('.card_box #nestable_list_' + i).nestable().on('change', (_e)=>{
-                            app.data.card.map(function(__e, __i){
-                                app.data.card_sort[__i] = $('#nestable_list_' + __i).nestable('serialize')
-                            });
-                            console.log(app.data.card_sort)
-                        });
-                    })
-                }
-            },
+				},
+				initTit: function(){
+					$('.page-title h1').text(app.data.title)
+					$('.page-title small').text(app.data.description)
+				},
+				end: function(){
+					history.go(-1)
+				},
+				save: function(){
+					app.methods.getSort()
+					console.log(app.data.card_sort)
+					// TODO
+					// 格式化 并 保存
+				},
+				getSort: function(){
+					app.data.card.map(function(__e, __i){
+						app.data.card_sort[__i] = $('#nestable_list_' + __i).nestable('serialize')
+					});
+				},
+			},
             init: function(){
-                Metronic.init(); // init metronic core components
-                Layout.init(); // init current layout
-                // 
-                app.methods.initTheme()
-                app.methods.initNestableHtml()
+				console.log(app.data.id)
+
+				Metronic.init(); // init metronic core components
+				
+				app.methods.initTit()
+				app.methods.initNestableHtml()
             }
         };
 
