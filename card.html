@@ -336,12 +336,12 @@ License: You must have a valid license purchased only from themeforest(the above
 				},
 				save: function(){
 					app.methods.getSort()
-					console.log(app.data.card_sort)
+					console.log(JSON.stringify(app.data.card_sort))
 					// TODO
 					// 格式化 并 保存
 				},
 				getSort: function(){
-					app.data.card.map(function(__e, __i){
+					app.data.card_main.map(function(__e, __i){
 						app.data.card_sort[__i] = $('#nestable_list_' + __i).nestable('serialize')
 					});
 				},
